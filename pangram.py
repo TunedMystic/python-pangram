@@ -1,3 +1,4 @@
+import unittest
 
 def get_missing_letters(sentance):
   """
@@ -30,5 +31,25 @@ def get_missing_letters(sentance):
   return "".join(sorted(metric.keys()))
 
 
+class TestPangram(unittest.TestCase):
+  
+  def setUp(self):
+    self.strings = [
+      ("A quick brown fox jumps over the lazy dog", ""),
+      ("A slow yellow fox crawls under the proactive dog", "bjkmqz"),
+      ("Lions, and tigers, and bears, oh my!", "cfjkpquvwxz"),
+      ("", "abcdefghijklmnopqrstuvwxyz"),
+    ]
+  
+  def test_pangrams(self):
+     for data in self.strings:
+      print "Testing:   %s" %(repr(data[0]))
+      print "Expecting: %s" %(repr(data[1]))
+      result = get_missing_letters(data[0])
+      print "Got:       %s" %(repr(result))
+      print "\n"
+      self.assertEqual(result, data[1])
+
+
 if __name__ == "__main__":
-  pass
+  unittest.main()
